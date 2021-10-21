@@ -1,0 +1,9 @@
+<div>
+    <ul *ngFor="let item of activePlayers">
+      <li>Имя: {{item.name}}</li>
+      <li>Команда: {{item.team_name}}</li>
+      <li>Игр в сезоне: {{item.games_played}}</li>
+      <img src={{getImg(item)}} alt="альтернативный текст">
+    </ul>
+  </div>
+<mat-paginator [length]="playersList.length" [pageSize]="10" (page)="onPageChanged($event)" ></mat-paginator>
