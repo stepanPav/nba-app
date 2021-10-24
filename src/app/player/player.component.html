@@ -1,1 +1,27 @@
-<p>player works!</p>
+<div class="player-card" *ngIf='playerStat'>
+    <h1 class='player-card-name'>
+        {{playerStat.name}}
+    </h1>
+    <img src="https://nba-players.herokuapp.com/players/{{names[0]}}/{{names[1]}}">
+    <p>Команда: {{playerStat.team_name}}</p>
+    <p>Игр в сезоне: {{playerStat.games_played}}</p>
+    <p>Очков за игру: {{playerStat.points_per_game}}</p>
+    <p>Ассистов за игру: {{playerStat.assists_per_game}}</p>
+    <p>Подборов за игру: {{playerStat.rebounds_per_game}}</p>
+    <p>Процент попаданий с игры: {{playerStat.field_goal_percentage}}</p>
+    <p>Блокшотов за игру: {{playerStat.blocks_per_game}}</p>
+    <p>Перехватов за игру: {{playerStat.steals_per_game}}</p>
+    <p>Попыток бросков за игру: {{playerStat.field_goals_attempted_per_game}}</p>
+    <p>Успешных попытков броска за игру: {{playerStat.field_goals_made_per_game}}</p>
+    <p>Подборов в защите за игру: {{playerStat.defensive_rebounds_per_game}}</p>
+    <p>Подборов в нападении за игру: {{playerStat.offensive_rebounds_per_game}}</p>
+    <p>Минут за игру: {{playerStat.minutes_per_game}}</p>
+    <p>Рейтинг эффективности: {{playerStat.player_efficiency_rating}}</p>
+    <p>Процент свободных бросков: {{playerStat.free_throw_percentage}}</p>
+    <p>Попыток трехочковых: {{playerStat.three_point_attempted_per_game}}</p>
+    <p>Успешных трехочковых за игру: {{playerStat.three_point_made_per_game}}</p>
+    <p>Процент успешных трехочковых: {{playerStat.three_point_percentage}}</p>
+    
+    <p>Добавить в избранное: {{playerStat.isLiked}}</p>
+    
+</div>

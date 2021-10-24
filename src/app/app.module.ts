@@ -19,7 +19,7 @@ import { PlayerComponent } from './player/player.component';
     PlayersComponent,
     TeamsComponent,
     LikedComponent,
-    PlayerComponent
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,

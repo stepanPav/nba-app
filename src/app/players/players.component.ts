@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersDataService } from '../players-data/players-data.service';
-import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
-interface IPlayer{
+export interface IPlayer{
   assists_per_game: number,
   blocks_per_game: number,
   defensive_rebounds_per_game: number,
@@ -24,7 +23,7 @@ interface IPlayer{
   three_point_made_per_game: number,
   three_point_percentage: number,
   turnovers_per_game: number,
-
+  isLiked: boolean;
 }
 
 
@@ -38,15 +37,20 @@ export class PlayersComponent implements OnInit {
   activePlayers: Array<any> = [];
   constructor(private _playersData: PlayersDataService) { }
   ngOnInit(): void {
-    this._playersData.getList().subscribe(data => {
-      let res: string = JSON.stringify(data);
-      if(res !== '{}'){
-        let tmp: Array<IPlayer> = JSON.parse(res); // в тмп списко игроков
-        this.playersList = tmp;
-        this.activePlayers = this.playersList.slice(0, 10);
-        console.log(this.activePlayers);
-      }
-    });
+    if(this._playersData.getList().length > 0) {
+      this.playersList = this._playersData.getList();
+      this.activePlayers = this.playersList.slice(0, 10);
+    }
+    else {
+      this._playersData.getListFromServer().subscribe(data => {
+        let res: string = JSON.stringify(data);
+        if(res !== '{}'){
+          this.playersList = data as Array<IPlayer>;
+          this.activePlayers = this.playersList.slice(0, 10);
+        }
+      });
+    }
+    
   }
 
   onPageChanged(e: any) {
@@ -55,9 +59,16 @@ export class PlayersComponent implements OnInit {
     this.activePlayers = this.playersList.slice(firstCut, secondCut);
   }
 
+  getURLFromName(name: string): string{
+    let names =  name.split(' ');
+    return names[1] + '/' +  names[0];
+  }
+
   getImg(item: IPlayer){
     let names =  item.name.split(' ');
     return 'https://nba-players.herokuapp.com/players/' + names[1] + '/' +  names[0];
   }
+
+  
 
 }
