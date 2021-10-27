@@ -1,1 +1,24 @@
-<p>liked works!</p>
+<div>
+  <div [ngStyle]='{"display": isLoaded ? "none" : "block"}'>
+    <mat-spinner  ></mat-spinner>
+  </div>
+  
+    <ul *ngFor="let item of likedList">
+      
+        <div class="player-card">
+          <a routerLink='/player/{{getURLFromName(item.name)}}'>
+            <li>Имя: {{item.name}}</li>
+            <li>Команда: {{item.team_name}}</li>
+            <li>Игр в сезоне: {{item.games_played}}</li>
+          </a>
+          <img src={{getImg(item)}} alt="альтернативный текст">
+          
+          <img (click)='changeFavorite(item)'[ngClass]="{ like_button: true, isLiked: item.is_liked}" src='../../assets/like.png'>
+        </div>
+    </ul>
+  </div>
+  <div *ngIf='likedList.length === 0 && isLoaded'> Список избранных игроков пуст!</div>
+
+
+
+  

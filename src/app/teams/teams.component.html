@@ -1,6 +1,10 @@
-<div>
+<div class=team>
     <ul *ngFor="let item of activeTeams">
-          <li>Команда: {{item}}</li>
-    </ul>
+          <a routerLink='/team/{{item.acr}}'>
+            <li>Команда: {{item.acr}}</li>
+          </a>
+          <img  class = 'team-logo'src='../../assets/teams-logo/{{item.acr}}.png'>
+          <img (click)='changeFavorite(item)'[ngClass]="{ like_button: true, isLiked: item.isLiked}" src='../../assets/like.png'>
+          </ul>
   </div>
 <mat-paginator [length]="teamsList.length" [pageSize]="10" (page)="onPageChanged($event)" ></mat-paginator>

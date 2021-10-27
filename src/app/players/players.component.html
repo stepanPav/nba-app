@@ -1,13 +1,21 @@
 <div>
-    <ul *ngFor="let item of activePlayers">
-      <a routerLink='/player/{{getURLFromName(item.name)}}'>
+  <div *ngIf='!isLoaded;else players' >  <mat-spinner></mat-spinner></div>
+    <ng-template #players>
+      <ul *ngFor="let item of activePlayers" >
+      
         <div class="player-card">
-          <li>Имя: {{item.name}}</li>
-          <li>Команда: {{item.team_name}}</li>
-          <li>Игр в сезоне: {{item.games_played}}</li>
+          <a routerLink='/player/{{getURLFromName(item.name)}}'>
+            <li>Имя: {{item.name}}</li>
+            <li>Команда: {{item.team_name}}</li>
+            <li>Игр в сезоне: {{item.games_played}}</li>
+          </a>
           <img src={{getImg(item)}} alt="альтернативный текст">
+          
+          <img (click)='changeFavorite(item)'[ngClass]="{ like_button: true, isLiked: item.is_liked}" src='../../assets/like.png'>
         </div>
-      </a>
     </ul>
+    <mat-paginator [length]="playersList.length" [pageSize]="10" (page)="onPageChanged($event)" ></mat-paginator>
+    </ng-template>
+    
   </div>
-<mat-paginator [length]="playersList.length" [pageSize]="10" (page)="onPageChanged($event)" ></mat-paginator>
+

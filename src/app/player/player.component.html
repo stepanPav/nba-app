@@ -1,8 +1,15 @@
+
+<div *ngIf='!isLoaded'>
+    <mat-spinner></mat-spinner>
+</div>
 <div class="player-card" *ngIf='playerStat'>
     <h1 class='player-card-name'>
         {{playerStat.name}}
     </h1>
     <img src="https://nba-players.herokuapp.com/players/{{names[0]}}/{{names[1]}}">
+    <p >
+        <img (click)='changeFavorite(playerStat)'[ngClass]="{ like_button: true, isLiked: playerStat.is_liked}" src='../../assets/like.png'>
+    </p>
     <p>Команда: {{playerStat.team_name}}</p>
     <p>Игр в сезоне: {{playerStat.games_played}}</p>
     <p>Очков за игру: {{playerStat.points_per_game}}</p>
@@ -22,6 +29,5 @@
     <p>Успешных трехочковых за игру: {{playerStat.three_point_made_per_game}}</p>
     <p>Процент успешных трехочковых: {{playerStat.three_point_percentage}}</p>
     
-    <p>Добавить в избранное: {{playerStat.isLiked}}</p>
-    
+   
 </div>

@@ -23,7 +23,7 @@ export interface IPlayer{
   three_point_made_per_game: number,
   three_point_percentage: number,
   turnovers_per_game: number,
-  isLiked: boolean;
+  is_liked: boolean;
 }
 
 
@@ -35,11 +35,14 @@ export interface IPlayer{
 export class PlayersComponent implements OnInit {
   playersList: Array<any> = [];
   activePlayers: Array<any> = [];
+  isLoaded: Boolean = false;
   constructor(private _playersData: PlayersDataService) { }
   ngOnInit(): void {
+
     if(this._playersData.getList().length > 0) {
       this.playersList = this._playersData.getList();
       this.activePlayers = this.playersList.slice(0, 10);
+      this.isLoaded= true;
     }
     else {
       this._playersData.getListFromServer().subscribe(data => {
@@ -47,6 +50,7 @@ export class PlayersComponent implements OnInit {
         if(res !== '{}'){
           this.playersList = data as Array<IPlayer>;
           this.activePlayers = this.playersList.slice(0, 10);
+          this.isLoaded= true;
         }
       });
     }
@@ -67,6 +71,15 @@ export class PlayersComponent implements OnInit {
   getImg(item: IPlayer){
     let names =  item.name.split(' ');
     return 'https://nba-players.herokuapp.com/players/' + names[1] + '/' +  names[0];
+  }
+
+  changeFavorite(player: IPlayer){
+    player.is_liked = !player.is_liked;
+    //console.log(this._playersData.getList()[2].name, this._playersData.getList()[2].isLiked);
+    if(player.is_liked)
+      this._playersData.addPlayer(player.name);
+    else
+      this._playersData.removePlayer(player.name);
   }
 
   

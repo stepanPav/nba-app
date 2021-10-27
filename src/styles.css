@@ -2,3 +2,19 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.player-card{
+    border: 1px black dashed ;
+}
+
+.like_button{
+    color: red;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
+.isLiked{
+    background-color: red;
+}

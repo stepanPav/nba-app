@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamsDataService } from '../teams-data/teams-data.service';
+import { IPlayer } from '../players/players.component';
+import { ITeam, TeamsDataService } from '../teams-data/teams-data.service';
 
 @Component({
   selector: 'app-teams',
@@ -14,6 +15,7 @@ export class TeamsComponent implements OnInit {
   ngOnInit(): void {
     this._teamsData.getList().subscribe(data => {
       let res: string = JSON.stringify(data);
+      console.log(res)
       if(res !== '{}'){
         let tmp: Array<any> = JSON.parse(res); // в тмп списко игроков
         this.teamsList = tmp;
@@ -29,4 +31,12 @@ export class TeamsComponent implements OnInit {
     this.activeTeams = this.teamsList.slice(firstCut, secondCut);
   }
 
+  changeFavorite(team: ITeam){
+    team.isLiked = !team.isLiked;
+    //console.log(this._playersData.getList()[2].name, this._playersData.getList()[2].isLiked);
+    if(team.isLiked)
+      this._teamsData.addTeam(team.acr);
+    else
+      this._teamsData.removeTeam(team.acr);
+  }
 }

@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { NoopAnimationsModule} from '@angular/platform-browser/animations'
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,9 @@ import { TeamsComponent } from './teams/teams.component';
 import { LikedComponent } from './liked/liked.component';
 import { PlayersDataService } from './players-data/players-data.service';
 import { PlayerComponent } from './player/player.component';
+import { MaterialModule } from './material.module';
+import { TeamInfoComponent } from './team-info/team-info.component';
+
 
 
 @NgModule({
@@ -20,6 +24,7 @@ import { PlayerComponent } from './player/player.component';
     TeamsComponent,
     LikedComponent,
     PlayerComponent,
+    TeamInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import { PlayerComponent } from './player/player.component';
     HttpClientModule,
     MatPaginatorModule,
     NoopAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MaterialModule,
+    BrowserAnimationsModule
 
   ],
   providers: [PlayersDataService],
