@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayersDataService } from '../players-data/players-data.service';
-import { IPlayer } from '../players/players.component';
-
-
+import { IPlayer } from '../types/player.type';
 
 
 @Component({

@@ -6,7 +6,7 @@
     <h1 class='player-card-name'>
         {{playerStat.name}}
     </h1>
-    <img src="https://nba-players.herokuapp.com/players/{{names[0]}}/{{names[1]}}">
+    <img [src]="'https://nba-players.herokuapp.com/players/'+ names[0] +'/'+names[1]">
     <p >
         <img (click)='changeFavorite(playerStat)'[ngClass]="{ like_button: true, isLiked: playerStat.is_liked}" src='../../assets/like.png'>
     </p>

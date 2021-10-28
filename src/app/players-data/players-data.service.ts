@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { IPlayer } from '../players/players.component';
+import { IPlayer } from '../types/player.type';
 import { AsyncSubject, BehaviorSubject } from 'rxjs';
+import { PLAYERS_API_URL, LOCAL_API_URL } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlayersDataService{
+export class PlayersDataService {
   playersList: Array<IPlayer> = [];
-  $likedPlayers: AsyncSubject<Array<string>> = new AsyncSubject();
+  $likedPlayers = new AsyncSubject<Array<string>>();
   listLiked: Array<string> = [];
-  curPage: number = 1;
+  curPage = 1;
+
   constructor(private http: HttpClient) {
-    this.http = http;
-    this.http.get('http://localhost:3000/players').subscribe(data=> {
+    this.http.get(`${LOCAL_API_URL}/players`).subscribe(data=> { 
       data = JSON.parse(JSON.parse(JSON.stringify(data))[0]['list']);
       this.$likedPlayers.next(data as Array<string>)
       this.$likedPlayers.complete();
     } );
    }
 
-  getListFromServer(){
-    let p = new BehaviorSubject({})
-    this.http.get("https://nba-players.herokuapp.com/players-stats")
+  public getListFromServer(): BehaviorSubject<any> {
+    let p = new BehaviorSubject({});
+    this.http.get(`${PLAYERS_API_URL}/players-stats`)
     .subscribe((data) => {
       this.$likedPlayers.subscribe(liked => {
         this.listLiked = liked as  Array<string>;
@@ -37,11 +38,11 @@ export class PlayersDataService{
     return p;
   }
 
-  getList(): Array<IPlayer> {
+  public getList(): Array<IPlayer> {
       return this.playersList;
   }
 
-  getPlayer(name: string): IPlayer | undefined {
+  public getPlayer(name: string): IPlayer | undefined {
     for(let i = 0; i< this.playersList.length; i++) {
       if(this.playersList[i].name === name)
         return this.playersList[i]
@@ -50,7 +51,7 @@ export class PlayersDataService{
   }
 
 
-  setFavorites(allPlayers: Array<IPlayer> ,likedPlayers: Array<string>): Array<IPlayer> {
+  private setFavorites(allPlayers: Array<IPlayer> ,likedPlayers: Array<string>): Array<IPlayer> {
     let indexOfLiked = 0;
     allPlayers = allPlayers.sort((n1,n2) => {
       if (n1.name > n2.name) {
@@ -74,7 +75,7 @@ export class PlayersDataService{
     } );
   }
 
-  getLikedList() {
+  public getLikedList() {
     let indexOfLiked = 0;
     return this.playersList.filter(val => {
       if(val.name === this.listLiked[indexOfLiked]) {
@@ -86,7 +87,7 @@ export class PlayersDataService{
     } );
   }
 
-  addPlayer(name: string){
+  public addPlayer(name: string){
     this.listLiked.push(name)
     this.listLiked = this.listLiked.sort((n1,n2) => {
       if (n1 > n2) {
@@ -100,7 +101,7 @@ export class PlayersDataService{
     this.updateDataOnServer()
   }
 
-  removePlayer(name: string){
+  public removePlayer(name: string){
     const index = this.listLiked.indexOf(name);
     if (index > -1) {
       this.listLiked.splice(index, 1);
@@ -109,11 +110,11 @@ export class PlayersDataService{
     return this.listLiked;
   }
 
-  updateDataOnServer() {
-    this.http.put('http://localhost:3000/players/1', {list: JSON.stringify(this.listLiked)}).subscribe()
+  private updateDataOnServer() {
+    this.http.put(`${LOCAL_API_URL}/players/1`, {list: JSON.stringify(this.listLiked)}).subscribe()
   } 
 
-  getPlayersFromTeam(team: string){
+  public getPlayersFromTeam(team: string){
     let res = [];
     for(let i = 0; i < this.playersList.length; i++){
          if(this.playersList[i].team_acronym === team){
@@ -123,23 +124,23 @@ export class PlayersDataService{
     return res;
   }
 
-  getURLFromName(name: string): string{
+  public getURLFromName(name: string): string{
     let names =  name.split(' ');
     return names[1] + '/' +  names[0];
   }
 
-  getImg(item: IPlayer){
+  public getImg(item: IPlayer){
     let names =  item.name.split(' ');
-    return 'https://nba-players.herokuapp.com/players/' + names[1] + '/' +  names[0];
+    return `${PLAYERS_API_URL}/players/${names[1]}/${names[0]}`;
   }
 
-  changeFavorite(player: IPlayer){
+  public changeFavorite(player: IPlayer){
     player.is_liked = !player.is_liked;
-    //console.log(this._playersData.getList()[2].name, this._playersData.getList()[2].isLiked);
-    if(player.is_liked)
+    if (player.is_liked) {
       this.addPlayer(player.name);
-    else
+    } else {
       this.removePlayer(player.name);
+    }
   }
 
 }

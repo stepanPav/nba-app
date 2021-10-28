@@ -4,12 +4,12 @@
         <ul *ngFor="let item of activePlayerOfTeam" >
         
           <div class="player-card">
-            <a routerLink='/player/{{getURLFromName(item.name)}}'>
+            <a [routerLink]="'/player/' + getURLFromName(item.name)">
               <li>Имя: {{item.name}}</li>
               <li>Команда: {{item.team_name}}</li>
               <li>Игр в сезоне: {{item.games_played}}</li>
             </a>
-            <img src={{getImg(item)}} alt="Фотография отсутвует">
+            <img [src]='getImg(item)' alt="Фотография отсутвует">
             
             <img (click)='changeFavorite(item)'[ngClass]="{ like_button: true, isLiked: item.is_liked}" src='../../assets/like.png'>
           </div>

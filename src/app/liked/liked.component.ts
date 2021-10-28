@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersDataService } from '../players-data/players-data.service';
-import { IPlayer } from '../players/players.component';
+import { IPlayer } from '../types/player.type';
 
 @Component({
   selector: 'app-liked',
   templateUrl: './liked.component.html',
-  styleUrls: ['..//app.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class LikedComponent implements OnInit {
 
@@ -24,7 +24,6 @@ export class LikedComponent implements OnInit {
         tmp+=1;
         let res: Array<IPlayer> = this._playersData.getLikedList();
         if(res.length > 0) {
-          console.log('baran')
           this.likedList = res;
         }
         if(tmp > 1){
@@ -34,28 +33,16 @@ export class LikedComponent implements OnInit {
     }
   }
 
-  getURLFromName(name: string): string{
-    let names =  name.split(' ');
-    return names[1] + '/' +  names[0];
+  public getURLFromName(name: string): string{
+    return this._playersData.getURLFromName(name);
   }
 
-  getImg(item: IPlayer){
-    let names =  item.name.split(' ');
-    return 'https://nba-players.herokuapp.com/players/' + names[1] + '/' +  names[0];
+  public getImg(item: IPlayer){
+    return this._playersData.getImg(item);
   }
 
-  changeFavorite(player: IPlayer){
-    player.is_liked = !player.is_liked;
-    //console.log(this._playersData.getList()[2].name, this._playersData.getList()[2].isLiked);
-    if(player.is_liked){
-      this._playersData.addPlayer(player.name);
-      this.likedList = this._playersData.getLikedList()
-    }
-    else{
-      this._playersData.removePlayer(player.name);
-      this.likedList = this._playersData.getLikedList()
-    }
-
+  public changeFavorite(player: IPlayer){
+    this._playersData.changeFavorite(player)
   }
 
 }

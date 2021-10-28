@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayersDataService } from '../players-data/players-data.service';
-import { IPlayer } from '../players/players.component';
+import { IPlayer } from '../types/player.type';
 import { TeamsDataService } from '../teams-data/teams-data.service';
 
 @Component({
@@ -39,22 +39,22 @@ export class TeamInfoComponent implements OnInit {
     
   }
 
-  onPageChanged(e: any) {
+  public onPageChanged(e: any) {
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     this.activePlayerOfTeam = this.listOfPlayers.slice(firstCut, secondCut);
   }
 
-  getURLFromName(name: string): string{
+  public getURLFromName(name: string): string{
     return this._playersData.getURLFromName(name);
   }
 
-  getImg(item: IPlayer){
+  public getImg(item: IPlayer){
     return this._playersData.getImg(item);
     
   }
 
-  changeFavorite(player: IPlayer){
+  public changeFavorite(player: IPlayer){
     this._playersData.changeFavorite(player)
   }
 

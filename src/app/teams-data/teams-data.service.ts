@@ -1,34 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AsyncSubject, BehaviorSubject } from 'rxjs';
+import { Team } from '../types/team.type';
+import {LOCAL_API_URL, PLAYERS_API_URL} from '../constants/index'
 
 
-export interface ITeam{
-  acr: string,
-  "isLiked": boolean
-
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamsDataService {
-  teamsList: Array<ITeam>=[];
+  teamsList: Array<Team>=[];
   likedTeams: Array<string> = [];
   $likedTeams: AsyncSubject<Array<string>> = new AsyncSubject();
   isLoaded: boolean = false;
   constructor(private http: HttpClient) {
     this.http = http;
-    http.get('http://localhost:3000/teams').subscribe(data=>{
+    http.get(`${LOCAL_API_URL}/teams`).subscribe(data=>{
       data = JSON.parse(JSON.parse(JSON.stringify(data))[0]['list']);
       this.$likedTeams.next(data as Array<string>);
       this.$likedTeams.complete();
     })
   }
 
-  getList(){
+  public getList(){
     let p = new BehaviorSubject({})
-    this.http.get("https://nba-players.herokuapp.com/teams")
+    this.http.get(`${PLAYERS_API_URL}/teams`)
     .subscribe((data) => {
       this.$likedTeams.subscribe(liked => {
         this.likedTeams = liked;
@@ -43,11 +40,12 @@ export class TeamsDataService {
   }
 
 
-  getTeam(name: string){
-    this.http.get("https://nba-players.herokuapp.com/players-stats-teams/"+ name).subscribe(data => console.log(data));
+  public getTeam(name: string){
+    this.http.get(`${PLAYERS_API_URL}/players-stats-teams/${name}`).subscribe(data => console.log(data));
   }
 
-  setLiked(teams: Array<string>, liked: Array<string>){
+
+  private setLiked(teams: Array<string>, liked: Array<string>){
     teams = teams.sort((a,b) => {
       if(a > b)
         return 1;
@@ -57,7 +55,7 @@ export class TeamsDataService {
         return 0
       
     })
-    let res: Array<ITeam> = [];
+    let res: Array<Team> = [];
     let count = 0;
     teams.forEach((val)=>{
       let isLiked = false;
@@ -72,7 +70,8 @@ export class TeamsDataService {
     return res;
   }
 
-  addTeam(name: string){
+
+  public addTeam(name: string){
     console.log(this.likedTeams)
     this.likedTeams.push(name)
     console.log(this.likedTeams)
@@ -86,10 +85,10 @@ export class TeamsDataService {
       return 0;
     });
     this.updateDataOnServer()
-
   }
 
-  removeTeam(name: string){
+
+  public removeTeam(name: string){
     const index = this.likedTeams.indexOf(name);
     if (index > -1) {
       this.likedTeams.splice(index, 1);
@@ -98,11 +97,9 @@ export class TeamsDataService {
     return this.likedTeams;
   }
 
-  updateDataOnServer(){
-    this.http.put('http://localhost:3000/teams/1', {list: JSON.stringify(this.likedTeams)}).subscribe()
+
+  private updateDataOnServer(){
+    this.http.put(`${LOCAL_API_URL}/teams/1`, {list: JSON.stringify(this.likedTeams)}).subscribe()
   }
-
-
-  
   
 }
