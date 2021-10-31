@@ -1,0 +1,96 @@
+{
+  "liked_players": [
+    {
+      "list": "[\"Aaron Brooks\",\"Aaron Gordon\",\"DeMar DeRozan\"]",
+      "id": 1
+    }
+  ],
+  "liked_teams": [
+    {
+      "list": "[\"bos\"]",
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "changed_players": [
+    {
+      "list_changed_players": [
+        {
+          "name": "Aaron Brooks",
+          "team_acronym": "min",
+          "team_name": "Minnesota Timberwolves",
+          "games_played": "225",
+          "minutes_per_game": "6:38",
+          "field_goals_attempted_per_game": "2.2",
+          "field_goals_made_per_game": "1.0",
+          "field_goal_percentage": "43.1",
+          "free_throw_percentage": "75.0",
+          "three_point_attempted_per_game": "0.9",
+          "three_point_made_per_game": "0.3",
+          "three_point_percentage": "33.3",
+          "points_per_game": "2.3",
+          "offensive_rebounds_per_game": "0.2",
+          "defensive_rebounds_per_game": "0.3",
+          "rebounds_per_game": "0.6",
+          "assists_per_game": "0.7",
+          "steals_per_game": "0.2",
+          "blocks_per_game": "0.0",
+          "turnovers_per_game": "0.3",
+          "player_efficiency_rating": "0.8",
+          "is_liked": false
+        },
+        {
+          "name": "Abdel Nader",
+          "team_acronym": "bos",
+          "team_name": "Boston Celtics",
+          "games_played": "221",
+          "minutes_per_game": "7:26",
+          "field_goals_attempted_per_game": "2.1",
+          "field_goals_made_per_game": "0.7",
+          "field_goal_percentage": "34.8",
+          "free_throw_percentage": "33.3",
+          "three_point_attempted_per_game": "1.1",
+          "three_point_made_per_game": "0.4",
+          "three_point_percentage": "33.3",
+          "points_per_game": "1.9",
+          "offensive_rebounds_per_game": "0.2",
+          "defensive_rebounds_per_game": "0.7",
+          "rebounds_per_game": "1.0",
+          "assists_per_game": "0.3",
+          "steals_per_game": "0.2",
+          "blocks_per_game": "0.2",
+          "turnovers_per_game": "0.4",
+          "player_efficiency_rating": "0.6",
+          "is_liked": false
+        },
+        {
+          "name": "Adreian Payne",
+          "team_acronym": "orl",
+          "team_name": "Orlando Magic",
+          "games_played": "50",
+          "minutes_per_game": "8:30",
+          "field_goals_attempted_per_game": "2.0",
+          "field_goals_made_per_game": "1.4",
+          "field_goal_percentage": "70.0",
+          "free_throw_percentage": "83.3",
+          "three_point_attempted_per_game": "0.6",
+          "three_point_made_per_game": "0.4",
+          "three_point_percentage": "66.7",
+          "points_per_game": "4.2",
+          "offensive_rebounds_per_game": "0.4",
+          "defensive_rebounds_per_game": "1.4",
+          "rebounds_per_game": "1.8",
+          "assists_per_game": "0.0",
+          "steals_per_game": "0.4",
+          "blocks_per_game": "0.0",
+          "turnovers_per_game": "0.4",
+          "player_efficiency_rating": "1.2",
+          "is_liked": false
+        }
+      ],
+      "id": 1
+    }
+  ]
+}
