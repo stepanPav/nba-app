@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Полная статистика игрока: {{data.name}} </h1>
+<div mat-dialog-content>
+    <p>Команда: {{data.team_name}}</p>
+    <p>Игр в сезоне: {{data.games_played}}</p>
+    <p>Очков за игру: {{data.points_per_game}}</p>
+    <p>Ассистов за игру: {{data.assists_per_game}}</p>
+    <p>Подборов за игру: {{data.rebounds_per_game}}</p>
+    <p>Процент попаданий с игры: {{data.field_goal_percentage}}</p>
+    <p>Блокшотов за игру: {{data.blocks_per_game}}</p>
+    <p>Перехватов за игру: {{data.steals_per_game}}</p>
+    <p>Попыток бросков за игру: {{data.field_goals_attempted_per_game}}</p>
+    <p>Успешных попытков броска за игру: {{data.field_goals_made_per_game}}</p>
+    <p>Подборов в защите за игру: {{data.defensive_rebounds_per_game}}</p>
+    <p>Подборов в нападении за игру: {{data.offensive_rebounds_per_game}}</p>
+    <p>Минут за игру: {{data.minutes_per_game}}</p>
+    <p>Рейтинг эффективности: {{data.player_efficiency_rating}}</p>
+    <p>Процент свободных бросков: {{data.free_throw_percentage}}</p>
+    <p>Попыток трехочковых: {{data.three_point_attempted_per_game}}</p>
+    <p>Успешных трехочковых за игру: {{data.three_point_made_per_game}}</p>
+    <p>Процент успешных трехочковых: {{data.three_point_percentage}}</p>
+    
+</div>
+<div mat-dialog-actions>
+  <button class="mat-raised-button mat-primary"(click)="onClose()">Закрыть</button>
+  
+</div>

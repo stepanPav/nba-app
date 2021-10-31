@@ -9,12 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { TeamsComponent } from './teams/teams.component';
-import { LikedComponent } from './liked/liked.component';
+import { LikedPlayersComponent } from './liked/liked-players/liked-players.component';
+import { LikedTeamsComponent } from './liked/liked-teams/liked-teams.component';
 import { PlayersDataService } from './players-data/players-data.service';
 import { PlayerComponent } from './player/player.component';
 import { MaterialModule } from './material.module';
 import { TeamInfoComponent } from './team-info/team-info.component';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
+import { DialogModule } from './dialog.module'
+import { PlayerChangeDialog } from './dialog-template/player-info/player-change-dialog.component';
 
 
 @NgModule({
@@ -22,9 +26,11 @@ import { TeamInfoComponent } from './team-info/team-info.component';
     AppComponent,
     PlayersComponent,
     TeamsComponent,
-    LikedComponent,
+    LikedTeamsComponent,
+    LikedPlayersComponent,
     PlayerComponent,
-    TeamInfoComponent
+    TeamInfoComponent,
+    PlayerChangeDialog
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,10 @@ import { TeamInfoComponent } from './team-info/team-info.component';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    FormsModule,
+    DialogModule
 
   ],
   providers: [PlayersDataService],

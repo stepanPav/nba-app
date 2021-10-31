@@ -10,6 +10,7 @@
     <p >
         <img (click)='changeFavorite(playerStat)'[ngClass]="{ like_button: true, isLiked: playerStat.is_liked}" src='../../assets/like.png'>
     </p>
+    <p (click) = 'playerChangeInfo(playerStat)'> Изменить информацию </p>
     <p>Команда: {{playerStat.team_name}}</p>
     <p>Игр в сезоне: {{playerStat.games_played}}</p>
     <p>Очков за игру: {{playerStat.points_per_game}}</p>

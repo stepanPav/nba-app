@@ -16,7 +16,7 @@ export class TeamsDataService {
   isLoaded: boolean = false;
   constructor(private http: HttpClient) {
     this.http = http;
-    http.get(`${LOCAL_API_URL}/teams`).subscribe(data=>{
+    http.get(`${LOCAL_API_URL}/liked_teams`).subscribe(data=>{
       data = JSON.parse(JSON.parse(JSON.stringify(data))[0]['list']);
       this.$likedTeams.next(data as Array<string>);
       this.$likedTeams.complete();
@@ -39,6 +39,9 @@ export class TeamsDataService {
     return p;
   }
 
+  public getLikedTeams(): Array<Team> {
+    return this.teamsList.filter(val => val.isLiked);
+  }
 
   public getTeam(name: string){
     this.http.get(`${PLAYERS_API_URL}/players-stats-teams/${name}`).subscribe(data => console.log(data));
@@ -88,18 +91,18 @@ export class TeamsDataService {
   }
 
 
-  public removeTeam(name: string){
+  public removeTeam(name: string): void{
     const index = this.likedTeams.indexOf(name);
     if (index > -1) {
       this.likedTeams.splice(index, 1);
     }
     this.updateDataOnServer();
-    return this.likedTeams;
   }
 
 
+
   private updateDataOnServer(){
-    this.http.put(`${LOCAL_API_URL}/teams/1`, {list: JSON.stringify(this.likedTeams)}).subscribe()
+    this.http.put(`${LOCAL_API_URL}/liked_teams/1`, {list: JSON.stringify(this.likedTeams)}).subscribe()
   }
   
 }

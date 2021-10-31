@@ -1,0 +1,15 @@
+<div>
+    <div [ngStyle]='{"display": isLoaded ? "none" : "block"}'>
+      <mat-spinner  ></mat-spinner>
+    </div>
+    
+      <ul *ngFor="let item of likedList">
+        
+        <a [routerLink]="'/team/' + item.acr">
+            <li>Команда: {{item.acr}}</li>
+          </a>
+          <img class = 'team-logo' [src]="'../../assets/teams-logo/'+ item.acr +'.png'">
+          <img class="like_button" (click)='changeFavorite(item)' [class.isLiked]="item.isLiked" src='../../assets/like.png'>
+      </ul>
+    </div>
+    <div *ngIf='likedList.length === 0 && isLoaded'> Список избранных игроков пуст!</div>

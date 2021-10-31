@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayersDataService } from '../players-data/players-data.service';
 import { IPlayer } from '../types/player.type';
-
+import { MatDialog } from '@angular/material/dialog';
+import { PlayerChangeDialog } from '../dialog-template/player-info/player-change-dialog.component';
 
 @Component({
   selector: 'app-player',
@@ -14,7 +15,7 @@ export class PlayerComponent implements OnInit {
   names!: Array<string>;
   playerStat!: IPlayer;
   isLoaded= false;
-  constructor(private router: Router, private _playersData: PlayersDataService) {}
+  constructor(private router: Router, private _playersData: PlayersDataService, public dialog: MatDialog) {}
   
   ngOnInit(): void {
     this.href = this.router.url;
@@ -47,5 +48,21 @@ export class PlayerComponent implements OnInit {
     this._playersData.changeFavorite(item);
   }
   
+
+  public playerChangeInfo(player: IPlayer): void {
+    const dialogRef = this.dialog.open(PlayerChangeDialog, {
+      width: '1100px',
+      data: Object.assign({}, player)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.playerStat=result;
+        this._playersData.changePlayerInfo(result);
+        this._playersData.addChangedPlayer(this.playerStat);
+        
+      }
+    });
+  }
 
 }

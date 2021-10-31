@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersDataService } from '../players-data/players-data.service';
 import { IPlayer } from '../types/player.type';
-import {PLAYERS_API_URL} from '../constants/index'
+import { MatDialog } from '@angular/material/dialog';
+import { PlayerDialog } from '../dialog-template/player-dialog/player-dialog.component';
+
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
@@ -11,7 +13,7 @@ export class PlayersComponent implements OnInit {
   playersList: Array<any> = [];
   activePlayers: Array<any> = [];
   isLoaded: Boolean = false;
-  constructor(private _playersData: PlayersDataService) { }
+  constructor(private _playersData: PlayersDataService, public dialog: MatDialog) { }
   ngOnInit(): void {
 
     if(this._playersData.getList().length > 0) {
@@ -50,6 +52,16 @@ export class PlayersComponent implements OnInit {
     this._playersData.changeFavorite(player)
   }
 
+  public playerInfo(player: IPlayer): void {
+    const dialogRef = this.dialog.open(PlayerDialog, {
+      width: '1100px',
+      data: player
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+  }
   
 
 }

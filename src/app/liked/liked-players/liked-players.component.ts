@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayersDataService } from '../players-data/players-data.service';
-import { IPlayer } from '../types/player.type';
+import { PlayersDataService } from '../../players-data/players-data.service';
+import { IPlayer } from '../../types/player.type';
 
 @Component({
   selector: 'app-liked',
-  templateUrl: './liked.component.html',
-  styleUrls: ['../app.component.css']
+  templateUrl: './liked-players.component.html',
+  styleUrls: ['']
 })
-export class LikedComponent implements OnInit {
+export class LikedPlayersComponent implements OnInit {
 
   likedList: Array<IPlayer> = []
   isLoaded: boolean = false;
@@ -42,7 +42,17 @@ export class LikedComponent implements OnInit {
   }
 
   public changeFavorite(player: IPlayer){
-    this._playersData.changeFavorite(player)
+    player.is_liked = !player.is_liked;
+    //console.log(this._playersData.getList()[2].name, this._playersData.getList()[2].isLiked);
+    if(player.is_liked){
+      this._playersData.addPlayer(player.name);
+      this.likedList = this._playersData.getLikedList()
+    }
+    else{
+      this._playersData.removePlayer(player.name);
+      this.likedList = this._playersData.getLikedList()
+    }
+
   }
 
 }

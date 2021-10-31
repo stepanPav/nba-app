@@ -15,12 +15,10 @@ export class TeamsComponent implements OnInit {
   ngOnInit(): void {
     this._teamsData.getList().subscribe(data => {
       let res: string = JSON.stringify(data);
-      console.log(res)
       if(res !== '{}'){
         let tmp: Array<Team> = JSON.parse(res); // в тмп списко игроков
         this.teamsList = tmp;
         this.activeTeams = this.teamsList.slice(0, 10);
-        console.log(this.activeTeams);
       }
     });
   }

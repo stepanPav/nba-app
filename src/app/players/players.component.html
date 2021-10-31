@@ -4,6 +4,7 @@
       <ul *ngFor="let item of activePlayers" >
       
         <div class="player-card">
+          <h1 (click) = 'playerInfo(item)'> Сюда тыкнуть необходимо</h1>
           <a [routerLink]="'/player/' + getURLFromName(item.name)">
             <li>Имя: {{item.name}}</li>
             <li>Команда: {{item.team_name}}</li>

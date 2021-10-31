@@ -1,0 +1,127 @@
+
+<div mat-dialog-content>
+  <p>Изменить данные для {{data.name}}</p>
+  <mat-form-field appearance="fill">
+    <label>Имя: </label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <br>
+    <mat-form-field appearance="fill">
+    <mat-label>Игр в сезоне:</mat-label>
+      <input matInput [(ngModel)]="data.games_played">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Очков за игру:</mat-label>
+      <input matInput [(ngModel)]="data.points_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Ассистов за игру:</mat-label>
+      <input matInput [(ngModel)]="data.assists_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Подборов за игру:</mat-label>
+      <input matInput [(ngModel)]="data.rebounds_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Процент попаданий с игры:</mat-label>
+      <input matInput [(ngModel)]="data.field_goal_percentage">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Блокшотов за игру:</mat-label>
+      <input matInput [(ngModel)]="data.blocks_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Перехватов за игру:</mat-label>
+      <input matInput [(ngModel)]="data.steals_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Попыток бросков за игру :</mat-label>
+      <input matInput [(ngModel)]="data.field_goals_attempted_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Попаданий за игру:</mat-label>
+      <input matInput [(ngModel)]="data.field_goals_made_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Подборов в защите:</mat-label>
+      <input matInput [(ngModel)]="data.defensive_rebounds_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Подборов в атаке:</mat-label>
+      <input matInput [(ngModel)]="data.offensive_rebounds_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Минут за игру:</mat-label>
+      <input matInput [(ngModel)]="data.minutes_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Рейтинг эффективности:</mat-label>
+      <input matInput [(ngModel)]="data.player_efficiency_rating">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Процент свободных бросков:</mat-label>
+      <input matInput [(ngModel)]="data.free_throw_percentage">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Попыток трехочковых:</mat-label>
+      <input matInput [(ngModel)]="data.three_point_attempted_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Успешных трехочковых за игру:</mat-label>
+      <input matInput [(ngModel)]="data.three_point_made_per_game">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Процент успешных трехочковых:</mat-label>
+      <input matInput [(ngModel)]="data.three_point_percentage">
+    </mat-form-field>
+    <br>
+    <div mat-dialog-actions>
+      <button class="mat-raised-button" mat-dialog-close [mat-dialog-close]='data'>Сохранить</button>
+      <button class="mat-raised-button mat-primary" mat-dialog-close [mat-dialog-close]='false'>Отменить</button>
+      
+    </div>
+</div>
+
+
+<!-- <h1 mat-dialog-title>Полная статистика игрока: {{data.name}} </h1>
+<div mat-dialog-content>
+    <p>Команда: {{data.team_name}}</p>
+    <p>Игр в сезоне: {{data.games_played}}</p>
+    <p>Очков за игру: {{data.points_per_game}}</p>
+    <p>Ассистов за игру: {{data.assists_per_game}}</p>
+    <p>Подборов за игру: {{data.rebounds_per_game}}</p>
+    <p>Процент попаданий с игры: {{data.field_goal_percentage}}</p>
+    <p>Блокшотов за игру: {{data.blocks_per_game}}</p>
+    <p>Перехватов за игру: {{data.steals_per_game}}</p>
+    <p>Попыток бросков за игру: {{data.field_goals_attempted_per_game}}</p>
+    <p>Успешных попытков броска за игру: {{data.field_goals_made_per_game}}</p>
+    <p>Подборов в защите за игру: {{data.defensive_rebounds_per_game}}</p>
+    <p>Подборов в нападении за игру: {{data.offensive_rebounds_per_game}}</p>
+    <p>Минут за игру: {{data.minutes_per_game}}</p>
+    <p>Рейтинг эффективности: {{data.player_efficiency_rating}}</p>
+    <p>Процент свободных бросков: {{data.free_throw_percentage}}</p>
+    <p>Попыток трехочковых: {{data.three_point_attempted_per_game}}</p>
+    <p>Успешных трехочковых за игру: {{data.three_point_made_per_game}}</p>
+    <p>Процент успешных трехочковых: {{data.three_point_percentage}}</p>
+    
+</div>
+<div mat-dialog-actions>
+  <button class="mat-raised-button mat-primary"(click)="onClose()">Закрыть</button>
+  
+</div> -->

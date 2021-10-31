@@ -15,3 +15,10 @@
     background-color: red;
 }
 
+.team-logo{
+    width: 175px;
+    height: 175px;
+}
+.team li{
+    margin-bottom: 10px;
+}

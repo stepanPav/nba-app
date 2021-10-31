@@ -1,10 +1,10 @@
 <div class=team>
     <ul *ngFor="let item of activeTeams">
-          <a [routerLink]="'/team/' + item.acr">
-            <li>Команда: {{item.acr}}</li>
-          </a>
-          <img class = 'team-logo' [src]="'../../assets/teams-logo/'+ item.acr +'.png'">
-          <img class="like_button" (click)='changeFavorite(item)' [class.isLiked]="item.isLiked" src='../../assets/like.png'>
-          </ul>
+        <a [routerLink]="'/team/' + item.acr">
+          <li>Команда: {{item.acr}}</li>
+        </a>
+        <img class = 'team-logo' [src]="'../../assets/teams-logo/'+ item.acr +'.png'">
+        <img class="like_button" (click)='changeFavorite(item)' [class.isLiked]="item.isLiked" src='../../assets/like.png'>
+    </ul>
   </div>
 <mat-paginator [length]="teamsList.length" [pageSize]="10" (page)="onPageChanged($event)" ></mat-paginator>
