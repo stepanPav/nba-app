@@ -1,5 +1,5 @@
 <div>
-  <div [ngStyle]='{"display": isLoaded ? "none" : "block"}'>
+  <div [ngStyle]='{"display": isLoaded? "none" : "block"}'>
     <mat-spinner  ></mat-spinner>
   </div>
   
@@ -17,7 +17,7 @@
         </div>
     </ul>
   </div>
-  <div *ngIf='likedList.length === 0 && isLoaded'> Список избранных команд пуст!</div>
+  <div *ngIf='likedList.length === 0 && isLoaded'> Список избранных игроков пуст!</div>
 
 
 

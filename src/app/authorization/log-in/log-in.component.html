@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Авторизация:  </h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Введите имя</mat-label>
+        <input type="text" matInput [(ngModel)]='name'>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Введите пароль</mat-label>
+        <input type="password" matInput [(ngModel)]='password'>
+    </mat-form-field>
+    <br>
+    
+</div>
+<div mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" (click)='logIn()'>Войти</button>
+  
+</div>

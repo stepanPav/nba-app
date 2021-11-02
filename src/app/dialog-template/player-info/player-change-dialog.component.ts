@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IPlayer } from '../../types/player.type';
 
 @Component({
     selector: 'player-change-dialog',
     templateUrl: 'player-change-dialog.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayerChangeDialog {
     constructor(

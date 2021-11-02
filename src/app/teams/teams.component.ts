@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TeamsDataService } from '../teams-data/teams-data.service';
 import { Team } from '../types/team.type';
 
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.css']
+  styleUrls: ['./teams.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeamsComponent implements OnInit {
   teamsList: Array<Team> = [];
   activeTeams: Array<Team> = [];
-  constructor(private _teamsData: TeamsDataService) { }
+  constructor(private _teamsData: TeamsDataService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this._teamsData.getList().subscribe(data => {
@@ -19,6 +20,7 @@ export class TeamsComponent implements OnInit {
         let tmp: Array<Team> = JSON.parse(res); // в тмп списко игроков
         this.teamsList = tmp;
         this.activeTeams = this.teamsList.slice(0, 10);
+        this.cdr.markForCheck();
       }
     });
   }

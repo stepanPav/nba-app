@@ -90,6 +90,9 @@ export class PlayersDataService {
   }
 
   private setChangedPlayers(allPlayers: Array<IPlayer> ,changedPlayers: Array<IPlayer>): Array<IPlayer>{
+    if(changedPlayers.length === 0){
+      return allPlayers;
+    }
     let indexOfChanged = 0;
     allPlayers = allPlayers.sort((n1,n2) => {
       if (n1.name > n2.name) {
@@ -191,25 +194,41 @@ export class PlayersDataService {
     for(let i = 0; i < this.playersList.length; i++){
       if(player.name === this.playersList[i].name){
         this.playersList[i] = player;
-        this.http.get(`${LOCAL_API_URL}/changed_players/1`).subscribe(data => console.log(data));
+        //this.http.get(`${LOCAL_API_URL}/changed_players/1`).subscribe(data => console.log(data));
         //console.log('fine');
         return;
       }
     }
   }
 
+  private checkChangeInfo(player: IPlayer): boolean{
+    for(let i = 0; i < this.playersChangedList.length; i++){
+      if(this.playersChangedList[i].name === player.name){
+        this.playersChangedList[i] = player;
+        return true;
+      }
+    }
+    return false;
+  }
+
   public addChangedPlayer(player: IPlayer) {
-    this.playersChangedList.push(player);
-    this.playersChangedList = this.playersChangedList.sort((n1,n2) => {
-      if (n1.name > n2.name) {
-          return 1;
-      }
-      else if (n1.name < n2.name) {
-          return -1;
-      }
-      return 0;
-    });
-    this.updateChangedPlayersOnServer();
+    if(this.checkChangeInfo(player)){
+      this.updateChangedPlayersOnServer();
+      return;
+    }
+    else {
+      this.playersChangedList.push(player);
+      this.playersChangedList = this.playersChangedList.sort((n1,n2) => {
+        if (n1.name > n2.name) {
+            return 1;
+        }
+        else if (n1.name < n2.name) {
+            return -1;
+        }
+        return 0;
+      });
+      this.updateChangedPlayersOnServer();
+    }
   }
 
 }

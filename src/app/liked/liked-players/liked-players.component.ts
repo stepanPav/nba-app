@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PlayersDataService } from '../../players-data/players-data.service';
 import { IPlayer } from '../../types/player.type';
 
 @Component({
   selector: 'app-liked',
   templateUrl: './liked-players.component.html',
-  styleUrls: ['']
+  styleUrls: [''],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LikedPlayersComponent implements OnInit {
 
   likedList: Array<IPlayer> = []
   isLoaded: boolean = false;
-  constructor(private _playersData: PlayersDataService) { }
+  constructor(private _playersData: PlayersDataService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     if(this._playersData.getList().length > 0) {
       this.likedList = this._playersData.getLikedList();
       this.isLoaded = true;
+      this.cdr.detectChanges()
     }
     else {
       let tmp = 0;
@@ -27,6 +29,7 @@ export class LikedPlayersComponent implements OnInit {
           this.likedList = res;
         }
         if(tmp > 1){
+          this.cdr.markForCheck()
           this.isLoaded = true;
         }
       });

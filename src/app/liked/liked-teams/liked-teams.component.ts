@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TeamsDataService } from 'src/app/teams-data/teams-data.service';
 import { Team } from 'src/app/types/team.type';
 
 @Component({
   selector: 'app-liked-teams',
   templateUrl: './liked-teams.component.html',
-  styleUrls: ['']
+  styleUrls: ['./liked-teams.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LikedTeamsComponent implements OnInit {
 
   likedList: Array<Team> = []
   isLoaded: boolean = false;
-  constructor(private _teamsData: TeamsDataService) { }
+  constructor(private _teamsData: TeamsDataService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     
@@ -25,18 +26,11 @@ export class LikedTeamsComponent implements OnInit {
         }
         if(tmp > 1){
             this.isLoaded = true;
+            this.cdr.detectChanges()
         }
     });
     
   }
-
-//   public getURLFromName(name: string): string{
-//     return this._teamsData.getURLFromName(name);
-//   }
-
-//   public getImg(item: IPlayer){
-//     return this._teamsData.getImg(item);
-//   }
 
   public changeFavorite(team: Team){
     team.isLiked = !team.isLiked;

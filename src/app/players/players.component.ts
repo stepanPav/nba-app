@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PlayersDataService } from '../players-data/players-data.service';
 import { IPlayer } from '../types/player.type';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,13 +7,14 @@ import { PlayerDialog } from '../dialog-template/player-dialog/player-dialog.com
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
-  styleUrls: ['./players.component.css']
+  styleUrls: ['./players.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayersComponent implements OnInit {
   playersList: Array<any> = [];
   activePlayers: Array<any> = [];
   isLoaded: Boolean = false;
-  constructor(private _playersData: PlayersDataService, public dialog: MatDialog) { }
+  constructor(private _playersData: PlayersDataService, public dialog: MatDialog, private cdr: ChangeDetectorRef) { }
   ngOnInit(): void {
 
     if(this._playersData.getList().length > 0) {
@@ -28,6 +29,8 @@ export class PlayersComponent implements OnInit {
           this.playersList = data as Array<IPlayer>;
           this.activePlayers = this.playersList.slice(0, 10);
           this.isLoaded= true;
+          this.cdr.detectChanges();
+          
         }
       });
     }

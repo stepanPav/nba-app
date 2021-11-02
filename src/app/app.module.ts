@@ -19,6 +19,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from './dialog.module'
 import { PlayerChangeDialog } from './dialog-template/player-info/player-change-dialog.component';
+import { LogInComponent } from './authorization/log-in/log-in.component';
+import { SingUpComponent } from './authorization/sing-up/sing-up.component';
+import { LoginGuard } from './guards/login.guards';
+import { TeamsDataService } from './teams-data/teams-data.service';
 
 
 @NgModule({
@@ -26,11 +30,13 @@ import { PlayerChangeDialog } from './dialog-template/player-info/player-change-
     AppComponent,
     PlayersComponent,
     TeamsComponent,
-    LikedTeamsComponent,
     LikedPlayersComponent,
     PlayerComponent,
     TeamInfoComponent,
-    PlayerChangeDialog
+    PlayerChangeDialog,
+    LikedTeamsComponent,
+    LogInComponent,
+    SingUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,7 @@ import { PlayerChangeDialog } from './dialog-template/player-info/player-change-
     DialogModule
 
   ],
-  providers: [PlayersDataService],
+  providers: [PlayersDataService, TeamsDataService, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayersDataService } from '../players-data/players-data.service';
 import { IPlayer } from '../types/player.type';
@@ -7,14 +7,16 @@ import { TeamsDataService } from '../teams-data/teams-data.service';
 @Component({
   selector: 'app-teams',
   templateUrl: './team-info.component.html',
-  styleUrls: ['../players/players.component.css']
+  styleUrls: ['../players/players.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeamInfoComponent implements OnInit {
   listOfPlayers: Array<IPlayer> = [];
   activePlayerOfTeam: Array<IPlayer> = [];
   isLoaded: boolean = false;
   curTeam: string = '';
-  constructor(private router: Router, private _teamsData: TeamsDataService, private _playersData: PlayersDataService) { }
+  constructor(private router: Router, private _teamsData: TeamsDataService, 
+              private _playersData: PlayersDataService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.curTeam = this.router.url.split('/')[2];
@@ -33,6 +35,7 @@ export class TeamInfoComponent implements OnInit {
             this.listOfPlayers = this._playersData.getPlayersFromTeam(this.curTeam);
             this.activePlayerOfTeam = this.listOfPlayers.slice(0, 10);
             this.isLoaded= true;
+            this.cdr.markForCheck();
           }
         });
       }
